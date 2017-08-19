@@ -1,0 +1,25 @@
+- name: remove old DNSes
+  become: true
+  replace:
+    path: /etc/dhcp/dhclient.conf
+    backup: yes
+    regexp: '(.*nameserver.*)|(.*prepend\s+domain-name-servers.*)'
+    mode: "0600"
+    owner: root
+  notify: restart openvpn
+
+- name: add our servers
+  become: true
+  lineinfile:
+    path: /etc/dhcp/dhclient.conf
+    mode: "0600"
+    owner: root
+    line: "prepend domain-name-servers {{ OPENVPN_FORCE_DNS }}"
+
+- name: add our servers to resolf.conf
+  become: true
+  lineinfile:
+    path: /etc/dhcp/dhclient.conf
+    mode: "0600"
+    owner: root
+    line: "prepend domain-name-servers {{ OPENVPN_FORCE_DNS }}"

@@ -1,0 +1,40 @@
+---
+
+openvpn_credential_file_name: /etc/openvpn/credentials
+openvpn_fix_routes_file_name: /etc/openvpn/fix_routes.sh
+
+OPEN_VPN_DEPENDENCIES:
+  - openvpn
+
+OPENVPN_KEY: null
+OPENVPN_CRT: null
+
+OPENVPN_USERNAME: null
+OPENVPN_PASSWORD: null
+
+OPENVPN_CONFIGURATION_TEMPLATE: 'openvpn_template'
+
+OPENVPN_DEFAULT_CONFIG: null
+OPENVPN_DEFAULT_ENABLE_DOCKER_HELP: False
+
+OPENVPN_DEFAULT_VERBOSITY: 2
+
+OPENVPN_DEFAULT_PROTO: "udp"
+
+# Comma separated list of dns servers you wish to use
+# OPENVPN_FORCE_DNS: '46.227.67.134, 192.165.9.15'
+OPENVPN_FORCE_DNS: null
+
+UPDATE_RESOLV_CONF:
+
+# If set will redirect logs and setup logrotate
+OPENVPN_LOG_TO_FILE: null
+
+
+OPENVPN_CONFS:
+  - name: us-losangeles
+    docker_helper: "{{ OPENVPN_DEFAULT_ENABLE_DOCKER_HELP }}"
+    verbosity: "{{ OPENVPN_DEFAULT_VERBOSITY }}"
+    proto: "{{ OPENVPN_DEFAULT_PROTO }}"
+    server_list: |
+      remote something

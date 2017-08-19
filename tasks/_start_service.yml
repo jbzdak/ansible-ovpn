@@ -1,0 +1,4 @@
+- name: Ensure openvpn is started
+  systemd:
+    name: openvpn
+    state: started

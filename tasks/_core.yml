@@ -1,0 +1,51 @@
+
+- name: assert apt is up to date
+  apt: upgrade=safe
+
+- name: install openvpn
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ OPEN_VPN_DEPENDENCIES }}"
+
+- name: copy fix routes
+  copy:
+    src: 'fix-routes.sh'
+    dest: "{{ openvpn_fix_routes_file_name }}"
+    mode: "0700"
+    owner: "root"
+  notify: restart openvpn
+
+- name: install key
+  copy:
+    content: "{{ OPENVPN_KEY }}"
+    dest: /etc/openvpn/ovpn-tls.key
+    mode: "0600"
+    owner: root
+  notify: restart openvpn
+
+- name: install cert
+  copy:
+    content: "{{ OPENVPN_CRT }}"
+    dest: /etc/openvpn/ovpn-cert.key
+    mode: "0600"
+    owner: root
+  notify: restart openvpn
+
+- name: install creds
+  template:
+    src: openvpn_credentials
+    dest: "{{ openvpn_credential_file_name }}"
+    mode: "0600"
+    owner: root
+  notify: restart openvpn
+
+- name: install config
+  template:
+    src: "{{ OPENVPN_CONFIGURATION_TEMPLATE }}"
+    dest: /etc/openvpn/{{item.name}}.conf
+    mode: "0600"
+    owner: root
+  with_items: "{{ OPENVPN_CONFS }}"
+  notify: restart openvpn
+

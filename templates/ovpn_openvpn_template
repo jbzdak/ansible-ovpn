@@ -1,0 +1,34 @@
+
+client
+dev tun
+
+proto {{ item.proto }}
+
+{{ item.server_list }}
+
+remote-random
+
+mute-replay-warnings
+replay-window 256
+
+remote-cert-tls server
+cipher aes-256-cbc
+pull
+
+nobind
+reneg-sec 432000
+resolv-retry infinite
+
+comp-lzo
+verb {{ item.verbosity }}
+
+{% if item.docker_helper %}
+script-security 2
+route-up  /etc/openvpn/fix-routes.sh
+{% endif %}
+
+persist-key
+persist-tun
+auth-user-pass {{ openvpn_credential_file_name }}
+ca /etc/openvpn/ovpn-cert.key
+tls-auth /etc/openvpn/ovpn-tls.key 1

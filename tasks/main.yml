@@ -1,0 +1,13 @@
+---
+
+- include: "_core.yml"
+  become: true
+- include: "_set_default_connection.yml"
+  when: "OPENVPN_DEFAULT_CONFIG != None"
+  become: true
+- include: "_force_dns.yml"
+  when: "OPENVPN_FORCE_DNS != None"
+  become: true
+- include: "_start_service.yml"
+  become: true
+
