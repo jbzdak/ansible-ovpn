@@ -32,3 +32,5 @@ persist-tun
 auth-user-pass {{ openvpn_credential_file_name }}
 ca /etc/openvpn/ovpn-cert.key
 tls-auth /etc/openvpn/ovpn-tls.key 1
+up /etc/openvpn/update-resolv-conf
+down /etc/openvpn/update-resolv-conf
