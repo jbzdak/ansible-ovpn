@@ -22,8 +22,9 @@ resolv-retry infinite
 comp-lzo
 verb {{ item.verbosity }}
 
-{% if item.docker_helper %}
 script-security 2
+
+{% if item.docker_helper %}
 route-up  /etc/openvpn/fix-routes.sh
 {% endif %}
 

@@ -1,17 +1,9 @@
-- name: set default connection
-  replace:
-    path: /etc/default/openvpn
-    backup: yes
-    regexp: '^\s*AUTOSTART=.*'
-    replace: ''
-    mode: "0600"
-    owner: root
-  notify: restart openvpn
 
 - name: set default connection
   lineinfile:
     path: /etc/default/openvpn
     backup: yes
+    regexp: 'AUTOSTART=.*'
     line: 'AUTOSTART={{ OPENVPN_DEFAULT_CONFIG }}'
     mode: "0600"
     owner: root
