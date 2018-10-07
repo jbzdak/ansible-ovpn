@@ -1,7 +1,7 @@
 ---
 
 openvpn_credential_file_name: /etc/openvpn/credentials
-openvpn_fix_routes_file_name: /etc/openvpn/fix_routes.sh
+openvpn_fix_routes_file_name: /etc/openvpn/fix-routes.sh
 
 OPEN_VPN_DEPENDENCIES:
   - openvpn
