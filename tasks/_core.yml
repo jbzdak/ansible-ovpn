@@ -4,9 +4,8 @@
 
 - name: install openvpn
   apt:
-    name: "{{ item }}"
+    name: "{{ OPEN_VPN_DEPENDENCIES }}"
     state: present
-  with_items: "{{ OPEN_VPN_DEPENDENCIES }}"
 
 - name: copy fix routes
   copy:
